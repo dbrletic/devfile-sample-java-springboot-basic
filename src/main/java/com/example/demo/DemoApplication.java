@@ -16,7 +16,7 @@ public class DemoApplication {
         return "Hello World!";
     }
     
-   @GetMapping(value = "/{name}")
+   @RequestMapping(value = "/{name}")
    String homeName(@PathVariable String name) {
         return "Hello " + name + "!";
     }
