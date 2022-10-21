@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @SpringBootApplication
 @RequestMapping("/rest-example")
@@ -14,7 +17,14 @@ public class DemoApplication {
 
     @RequestMapping("/")
     String home() {
-        return "Hello World!";
+		Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+        for (int i=0; i<= 50000; i++) {
+            logger.info("Hello i am here!");
+            // do some execution
+            logger.debug("this is a debug");
+            logger.info("i am done");
+        }
+        return "Hello World! Logging information now";
     }
     
    @RequestMapping(value = "/{name}")

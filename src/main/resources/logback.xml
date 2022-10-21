@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <!-- <appender name="FILE APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/myapp.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.S3FixedWindowRollingPolicy">
+            <fileNamePattern>logs/myapp.%i.log.gz</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>20</maxIndex>
+            <awsAccessKey>ACCESS_KEY</awsAccessKey>
+            <awsSecretKey>SECRET_KEY</awsSecretKey>
+            <s3BucketName>BUCKET_NAME</s3BucketName>
+            <s3FolderName>logs/%d{yyyy/MM/dd}</s3FolderName>
+            <rolloverOnExit>true</rolloverOnExit>
+            <shutdownHookType>JVM_SHUTDOWN_HOOK</shutdownHookType>
+            <prefixTimestamp>true</prefixTimestamp>
+            <prefixIdentifier>true</prefixIdentifier>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>20GB</maxFileSize>
+        </triggeringPolicy>
+
+        <encoder>
+            <pattern>[%d] %-8relative %22c{0} [%-5level] %msg%xEx{3}%n</pattern>
+        </encoder>
+    </appender> -->
+
+<!--    <appender name="FNATP APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>logs/myapp.log</file>-->
+<!--        <encoder>-->
+<!--            <pattern>[%d] %-8relative %22c{0} [%-5level] %msg%xEx{3}%n</pattern>-->
+<!--        </encoder>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.S3TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; Rollover every minute &ndash;&gt;-->
+<!--            <fileNamePattern>logs/myapp.%d{yyyy-MM-dd_HH-mm}.%i.log.gz</fileNamePattern>-->
+<!--            <awsAccessKey>ACCESS_KEY</awsAccessKey>-->
+<!--            <awsSecretKey>SECRET_KEY</awsSecretKey>-->
+<!--            <s3BucketName>myapp-logging</s3BucketName>-->
+<!--            <s3FolderName>log</s3FolderName>-->
+<!--            <rolloverOnExit>true</rolloverOnExit>-->
+<!--            <shutdownHookType>SERVLET_CONTEXT</shutdownHookType>-->
+<!--            <prefixTimestamp>false</prefixTimestamp>-->
+<!--            <prefixIdentifier>true</prefixIdentifier>-->
+<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+<!--                <maxFileSize>10MB</maxFileSize>-->
+<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
+<!--        </rollingPolicy>-->
+<!--    </appender>-->
+
+<!--    TODO: remove-->
+<!-- STDOUT console output   -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+    <!--    <appender-ref ref="FILE APPENDER" /> -->
+<!--        <appender-ref ref="FNATP APPENDER" />-->
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
