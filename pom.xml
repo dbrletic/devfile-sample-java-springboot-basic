@@ -55,6 +55,11 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.32</version>
 		</dependency>
+		 <dependency>
+			<groupId>org.fluentd</groupId>
+			<artifactId>fluent-logger</artifactId>
+			<version>0.3.4</version>
+  </dependency>
 	</dependencies>
 	<build>
 		<plugins>

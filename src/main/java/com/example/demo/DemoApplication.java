@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.fluentd.logger.FluentLogger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,11 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/rest-example")
 public class DemoApplication {
 
+	Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+	
     @RequestMapping("/")
     String home() {
-		Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+		
         for (int i=0; i<= 50000; i++) {
             logger.info("Hello i am here!");
             // do some execution
