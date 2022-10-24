@@ -19,16 +19,25 @@ public class DemoApplication {
 
     Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 	private static FluentLogger LOG = FluentLogger.getLogger("transaction_log.ng.double.encoded");
-	
+    private static FluentLogger LOGMANUAL = FluentLogger.getLogger("transaction_log.ng.double.encoded", "http://cloudwatch-openshift-logforwarding-cloudwatch.openshift-logging.svc", 24224);
+        
     @RequestMapping("/")
     String home() {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("from", "userA");
         data.put("to", "userB");
         LOG.log("follow", data);
-        return "Hello World! Logging information now";
+        return "Hello World! Logging information now through logback.xml";
     }
-    
+    @RequestMapping("/manual")
+    String manual(){
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("from", "userA");
+        data.put("to", "userB");
+        LOGMANUAL.log("follow", data);
+        return "Hello World! Logging information now through manual connection";
+    }
+
    @RequestMapping(value = "/{name}")
    String homeName(@PathVariable String name) {
         return "Hello " + name + "!";
