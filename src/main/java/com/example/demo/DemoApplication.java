@@ -37,6 +37,7 @@ public class DemoApplication {
         data.put("from", "userA");
         data.put("to", "userB");
         LOGMANUAL.log("follow", data);
+        LOGMANUAL.flush();
         return "Hello World! Logging information now through manual connection";
     }
 
