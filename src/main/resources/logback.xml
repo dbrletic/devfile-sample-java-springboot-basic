@@ -1,54 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration>
-    <!-- <appender name="FILE APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/myapp.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.S3FixedWindowRollingPolicy">
-            <fileNamePattern>logs/myapp.%i.log.gz</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>20</maxIndex>
-            <awsAccessKey>ACCESS_KEY</awsAccessKey>
-            <awsSecretKey>SECRET_KEY</awsSecretKey>
-            <s3BucketName>BUCKET_NAME</s3BucketName>
-            <s3FolderName>logs/%d{yyyy/MM/dd}</s3FolderName>
-            <rolloverOnExit>true</rolloverOnExit>
-            <shutdownHookType>JVM_SHUTDOWN_HOOK</shutdownHookType>
-            <prefixTimestamp>true</prefixTimestamp>
-            <prefixIdentifier>true</prefixIdentifier>
-        </rollingPolicy>
-
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>20GB</maxFileSize>
-        </triggeringPolicy>
-
+<configuration debug="true">
+    <property name="LOG_ROOT" value="/tmp" />
+	<property name="LOG_FILE_NAME" value="application" />
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_ROOT}/${LOG_FILE_NAME}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_ROOT}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<!-- each archived file's size will be max 10MB -->
+			<maxFileSize>10MB</maxFileSize>    
+			<!-- 30 days to keep -->
+			<maxHistory>30</maxHistory>
+			<!-- total size of all archive files, if total size > 100GB, it will delete old archived file -->
+			<totalSizeCap>100GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!-- Fluency -->
+    <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
+        <!-- Fluentd connection -->
+        <remoteHost>cloudwatch-openshift-logforwarding-cloudwatch.openshift-logging.svc</remoteHost>
+        <port>24224</port>
+        <tag>transaction_log.ng.double.encoded</tag>
+        <!-- [Optional] Configurations to customize Fluency's behavior: https://github.com/komamitsu/fluency#usage  -->
+        <!--<ackResponseMode>true</ackResponseMode>-->
+        <!--<fileBackupDir>/tmp</fileBackupDir>-->
+        <!--<bufferChunkInitialSize>2097152</bufferChunkInitialSize>-->
+        <!--<bufferChunkRetentionSize>16777216</bufferChunkRetentionSize>-->
+        <!--<maxBufferSize>268435456</maxBufferSize>-->
+        <!--<connectionTimeoutMilli>5000</connectionTimeoutMilli>-->
+        <!--<readTimeoutMilli>5000</readTimeoutMilli>-->
+        <!--<waitUntilBufferFlushed>30</waitUntilBufferFlushed>-->
+        <!--<waitUntilFlusherTerminated>40</waitUntilFlusherTerminated>-->
+        <!--<flushIntervalMillis>200</flushIntervalMillis>-->
+        <!--<senderMaxRetryCount>12</senderMaxRetryCount>-->
+        <!-- [Optional] Enable/Disable use of EventTime to get sub second resolution of log event date-time -->
+        <useEventTime>false</useEventTime>
+        <sslEnabled>false</sslEnabled>
+        <!--  [Optional] If true, Map Marker is expanded instead of nesting in the marker name -->
+        <flattenMapMarker>false</flattenMapMarker>
         <encoder>
-            <pattern>[%d] %-8relative %22c{0} [%-5level] %msg%xEx{3}%n</pattern>
-        </encoder>
-    </appender> -->
-
-<!--    <appender name="FNATP APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-<!--        <file>logs/myapp.log</file>-->
-<!--        <encoder>-->
-<!--            <pattern>[%d] %-8relative %22c{0} [%-5level] %msg%xEx{3}%n</pattern>-->
-<!--        </encoder>-->
-<!--        <rollingPolicy class="ch.qos.logback.core.rolling.S3TimeBasedRollingPolicy">-->
-<!--            &lt;!&ndash; Rollover every minute &ndash;&gt;-->
-<!--            <fileNamePattern>logs/myapp.%d{yyyy-MM-dd_HH-mm}.%i.log.gz</fileNamePattern>-->
-<!--            <awsAccessKey>ACCESS_KEY</awsAccessKey>-->
-<!--            <awsSecretKey>SECRET_KEY</awsSecretKey>-->
-<!--            <s3BucketName>myapp-logging</s3BucketName>-->
-<!--            <s3FolderName>log</s3FolderName>-->
-<!--            <rolloverOnExit>true</rolloverOnExit>-->
-<!--            <shutdownHookType>SERVLET_CONTEXT</shutdownHookType>-->
-<!--            <prefixTimestamp>false</prefixTimestamp>-->
-<!--            <prefixIdentifier>true</prefixIdentifier>-->
-<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
-<!--                <maxFileSize>10MB</maxFileSize>-->
-<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
-<!--        </rollingPolicy>-->
-<!--    </appender>-->
-
-<!--    TODO: remove-->
+            <pattern>%level</pattern>
+        </encoder>>
+        <!--        <encoder>-->
+        <!--            <pattern><![CDATA[%date{HH:mm:ss.SSS} [%thread] %-5level %logger{15}#%line %msg]]></pattern>-->
+        <!--        </encoder>-->
+    </appender>
+	
+    <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- Max queue size of logs which is waiting to be sent (When it reach to the max size, the log will be disappeared). -->
+        <queueSize>999</queueSize>
+        <!-- Never block when the queue becomes full. -->
+        <neverBlock>true</neverBlock>
+        <!-- The default maximum queue flush time allowed during appender stop.
+             If the worker takes longer than this time it will exit, discarding any remaining items in the queue.
+             10000 millis
+         -->
+        <maxFlushTime>10000</maxFlushTime>
+        <appender-ref ref="FLUENCY_SYNC" />
+    </appender>
+    <logger name="fluent_transaction_log" additivity="true">
+        <level value="DEBUG"/>
+        <appender-ref ref="FLUENCY"/>
+    </logger>
 <!-- STDOUT console output   -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -57,8 +73,7 @@
     </appender>
 
     <root level="debug">
-    <!--    <appender-ref ref="FILE APPENDER" /> -->
-<!--        <appender-ref ref="FNATP APPENDER" />-->
+		<appender-ref ref="FILE" />
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
