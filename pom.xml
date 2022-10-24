@@ -55,10 +55,27 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>2.0.3</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sndyuk</groupId>
+			<artifactId>logback-more-appenders</artifactId>
+			<version>1.8.7</version>
+		</dependency>
 		 <dependency>
 			<groupId>org.fluentd</groupId>
 			<artifactId>fluent-logger</artifactId>
 			<version>0.3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.komamitsu</groupId>
+			<artifactId>fluency-core</artifactId>
+			<version>2.7.0</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.komamitsu</groupId>
+			<artifactId>fluency-fluentd</artifactId>
+			<version>2.7.0</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 	<build>
