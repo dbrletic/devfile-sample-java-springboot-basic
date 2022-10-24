@@ -15,7 +15,6 @@ import org.fluentd.logger.FluentLogger;
 
 @RestController
 @SpringBootApplication
-@RequestMapping("/rest-example")
 public class DemoApplication {
 
     Logger logger = LoggerFactory.getLogger(DemoApplication.class);
