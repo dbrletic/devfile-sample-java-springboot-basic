@@ -25,16 +25,18 @@ public class DemoApplication {
     @RequestMapping("/")
     String home() {
         System.out.println("Starting FluentLogger through logback");
+        logger.info("Starting the default logger");
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("from", "userA");
         data.put("to", "userB");
         LOG.log("follow", data);
-        return "Hello World! Logging information now through logback.xml";
+        return "Hello World! Logging information now through logback.xml to remote server";
     }
     
     @RequestMapping("/manual")
     String manual(){
-        System.out.println("Starting FluentLogger through manaul connection");
+        System.out.println("Starting FluentLogger through manaul connection to remote server");
+        logger.info("Starting the manual logger");
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("from", "userA");
         data.put("to", "userB");
@@ -45,13 +47,15 @@ public class DemoApplication {
 
     @RequestMapping("/local")
     String local(){
-        System.out.println("Starting FluentLogger through local connection");
+        //Just to see if the java code will bomb out with a connection not running
+        System.out.println("Starting FluentLogger through local host");
+        logger.info("Starting the local logger");
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("from", "userA");
         data.put("to", "userB");
         LOGLOCAL.log("follow", data);
         LOGLOCAL.flush();
-        return "Hello World! Logging information now through local connection";
+        return "Hello World! Logging information now through local host";
     }
 
    @RequestMapping(value = "/{name}")
