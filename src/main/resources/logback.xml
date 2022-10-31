@@ -21,7 +21,7 @@
 	<!-- Fluency -->
     <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
         <!-- Fluentd connection -->
-        <remoteHost>cloudwatch-openshift-logforwarding-cloudwatch.openshift-logging.svc</remoteHost>
+        <remoteHost>127.0.0.1</remoteHost>
         <port>24224</port>
         <tag>transaction_log.ng.double.encoded</tag>
         <!-- [Optional] Configurations to customize Fluency's behavior: https://github.com/komamitsu/fluency#usage  -->
