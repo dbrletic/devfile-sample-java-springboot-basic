@@ -2,7 +2,9 @@
 
 <configuration debug="true">
     <property name="LOG_ROOT" value="/opt/cms/logs" />
-	<property name="LOG_FILE_NAME" value="application.log" />
+	<property name="LOG_FILE_NAME" value="application" />
+    <property name="TRANSACTRION_LOG_NAME" value="transaction.log" />
+
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_ROOT}/${LOG_FILE_NAME}.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -64,7 +66,8 @@
     <logger name="fluent_transaction_log" additivity="true">
         <level value="DEBUG"/>
         <appender-ref ref="FLUENCY"/>
-    </logger>
+    </logger> 
+
 <!-- STDOUT console output   -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
