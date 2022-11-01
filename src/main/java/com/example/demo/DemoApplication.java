@@ -69,7 +69,12 @@ public class DemoApplication {
      */
    @RequestMapping(value = "/{name}")
    String homeName(@PathVariable String name) {
-        return "Hello " + name + "!";
+    LOG.trace("This will be printed on trace for " + name);
+    LOG.debug("This will be printed on debug for " + name);
+    LOG.info("This will be printed on info for " + name);
+    LOG.warn("This will be printed on warn for " + name);
+    LOG.error("This will be printed on error for " + name);
+        return "Hello " + name + "! Log files have been printed for you";
     }
 
     public static void main(String[] args) {
