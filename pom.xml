@@ -38,43 +38,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			 <exclusions>
-        		<exclusion>
-            		<groupId>org.springframework.boot</groupId>
-            		<artifactId>spring-boot-starter-logging</artifactId>
-        		</exclusion>
-    		</exclusions>
-		</dependency>
-		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-   	 		<artifactId>spring-boot-starter-log4j2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sndyuk</groupId>
-			<artifactId>logback-more-appenders</artifactId>
-			<version>1.8.7</version>
-		</dependency>
-		 <dependency>
-			<groupId>org.fluentd</groupId>
-			<artifactId>fluent-logger</artifactId>
-			<version>0.3.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.komamitsu</groupId>
-			<artifactId>fluency-core</artifactId>
-			<version>2.7.0</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.komamitsu</groupId>
-			<artifactId>fluency-fluentd</artifactId>
-			<version>2.7.0</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>2.0.3</version>
 		</dependency>
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
@@ -90,16 +53,6 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.4.4</version>
 		</dependency>-->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>2.0.3</version>
-		</dependency>
-		<dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>2.0.3</version>
-        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
