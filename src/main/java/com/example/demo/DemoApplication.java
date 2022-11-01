@@ -18,7 +18,7 @@ import org.fluentd.logger.FluentLogger;
 public class DemoApplication {
 
     Logger logger = LoggerFactory.getLogger(DemoApplication.class);
-	private static FluentLogger LOG = FluentLogger.getLogger("transaction_log.ng.double.encoded");
+	//private static FluentLogger LOG = FluentLogger.getLogger("transaction_log.ng.double.encoded");
     //private static FluentLogger LOGMANUAL = FluentLogger.getLogger("transaction_log.ng.double.encoded", "cloudwatch-openshift-logforwarding-cloudwatch.openshift-logging.svc", 24224);
     //private static FluentLogger LOGLOCAL = FluentLogger.getLogger("transaction_log.ng.double.encoded", "localhost", 24224);
         
