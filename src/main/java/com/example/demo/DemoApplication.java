@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
+
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.HashMap;
@@ -67,6 +71,11 @@ public class DemoApplication {
     }
 
     public static void main(String[] args) {
+            // assume SLF4J is bound to logback in the current environment
+            LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+            // print logback's internal status
+            StatusPrinter.print(lc);
+
         SpringApplication.run(DemoApplication.class, args);
     }
 
