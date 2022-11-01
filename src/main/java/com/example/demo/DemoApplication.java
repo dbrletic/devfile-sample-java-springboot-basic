@@ -26,10 +26,11 @@ public class DemoApplication {
     String home() {
         System.out.println("Starting FluentLogger through logback");
         logger.info("Starting the default logger");
-        Map<String, Object> data = new HashMap<String, Object>();
+       /*  Map<String, Object> data = new HashMap<String, Object>();
         data.put("from", "userA");
         data.put("to", "userB");
-        LOG.log("follow", data);
+        LOG.log("follow", data); */
+        logger.info("Ending the default logger");
         return "Hello World! Logging information now through logback.xml to remote servergi";
     }
     /*

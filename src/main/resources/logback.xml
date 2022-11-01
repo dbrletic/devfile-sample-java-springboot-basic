@@ -20,54 +20,6 @@
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>
-	<!-- Fluency -->
-    <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
-        <!-- Fluentd connection -->
-        <remoteHost>127.0.0.1</remoteHost>
-        <port>24224</port>
-        <tag>transaction_log.ng.double.encoded</tag>
-        <!-- [Optional] Configurations to customize Fluency's behavior: https://github.com/komamitsu/fluency#usage  -->
-        <!--<ackResponseMode>true</ackResponseMode>-->
-        <!--<fileBackupDir>/tmp</fileBackupDir>-->
-        <!--<bufferChunkInitialSize>2097152</bufferChunkInitialSize>-->
-        <!--<bufferChunkRetentionSize>16777216</bufferChunkRetentionSize>-->
-        <!--<maxBufferSize>268435456</maxBufferSize>-->
-        <!--<connectionTimeoutMilli>5000</connectionTimeoutMilli>-->
-        <!--<readTimeoutMilli>5000</readTimeoutMilli>-->
-        <!--<waitUntilBufferFlushed>30</waitUntilBufferFlushed>-->
-        <!--<waitUntilFlusherTerminated>40</waitUntilFlusherTerminated>-->
-        <!--<flushIntervalMillis>200</flushIntervalMillis>-->
-        <!--<senderMaxRetryCount>12</senderMaxRetryCount>-->
-        <!-- [Optional] Enable/Disable use of EventTime to get sub second resolution of log event date-time -->
-        <useEventTime>false</useEventTime>
-        <sslEnabled>false</sslEnabled>
-        <!--  [Optional] If true, Map Marker is expanded instead of nesting in the marker name -->
-        <flattenMapMarker>false</flattenMapMarker>
-        <encoder>
-            <pattern>%level</pattern>
-        </encoder>>
-        <!--        <encoder>-->
-        <!--            <pattern><![CDATA[%date{HH:mm:ss.SSS} [%thread] %-5level %logger{15}#%line %msg]]></pattern>-->
-        <!--        </encoder>-->
-    </appender>
-	
-    <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
-        <!-- Max queue size of logs which is waiting to be sent (When it reach to the max size, the log will be disappeared). -->
-        <queueSize>999</queueSize>
-        <!-- Never block when the queue becomes full. -->
-        <neverBlock>true</neverBlock>
-        <!-- The default maximum queue flush time allowed during appender stop.
-             If the worker takes longer than this time it will exit, discarding any remaining items in the queue.
-             10000 millis
-         -->
-        <maxFlushTime>10000</maxFlushTime>
-        <appender-ref ref="FLUENCY_SYNC" />
-    </appender>
-    <logger name="fluent_transaction_log" additivity="true">
-        <level value="DEBUG"/>
-        <appender-ref ref="FLUENCY"/>
-    </logger> 
-
 <!-- STDOUT console output   -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
