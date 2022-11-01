@@ -21,22 +21,24 @@ import org.fluentd.logger.FluentLogger;
 @SpringBootApplication
 public class DemoApplication {
 
-    Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
 	//private static FluentLogger LOG = FluentLogger.getLogger("transaction_log.ng.double.encoded");
     //private static FluentLogger LOGMANUAL = FluentLogger.getLogger("transaction_log.ng.double.encoded", "cloudwatch-openshift-logforwarding-cloudwatch.openshift-logging.svc", 24224);
     //private static FluentLogger LOGLOCAL = FluentLogger.getLogger("transaction_log.ng.double.encoded", "localhost", 24224);
         
     @RequestMapping("/")
     String home() {
+
+        LOG.trace("This will be printed on trace");
+        LOG.debug("This will be printed on debug");
+        LOG.info("This will be printed on info");
+        LOG.warn("This will be printed on warn");
+        LOG.error("This will be printed on error");
         System.out.println("Starting FluentLogger through logback");
-        logger.info("Starting the default logger");
-        logger.debug("Starting the default logger with debug logging");
        /*  Map<String, Object> data = new HashMap<String, Object>();
         data.put("from", "userA");
         data.put("to", "userB");
         LOG.log("follow", data); */
-        logger.info("Ending the default logger");
-        logger.debug("Ending the default logger with debug logging");
         return "Hello World! Logging information now through logback.xml to remote servergi";
     }
     /*
