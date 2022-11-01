@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration debug="true">
-    <property name="LOG_ROOT" value="/tmp" />
-	<property name="LOG_FILE_NAME" value="application" />
+    <property name="LOG_ROOT" value="/opt/cms/logs" />
+	<property name="LOG_FILE_NAME" value="application.log" />
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_ROOT}/${LOG_FILE_NAME}.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
