@@ -3,7 +3,7 @@
 <configuration debug="true">
     <property name="LOG_ROOT" value="/opt/cms/logs" />
 	<property name="LOG_FILE_NAME" value="application" />
-    <property name="TRANSACTRION_LOG_NAME" value="transaction.log" />
+    <property name="TRANSACTRION_LOG_NAME" value="transaction" />
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
 		<file>${LOG_ROOT}/${LOG_FILE_NAME}.log</file>
@@ -23,4 +23,19 @@
 		<appender-ref ref="FILE" />
         <appender-ref ref="STDOUT" />
     </root>
+
+    <appender name="TRANSACTION" class="ch.qos.logback.core.FileAppender">
+       <file>${LOG_ROOT}/${TRANSACTRION_LOG_NAME}.log</file>
+        <append>true</append>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+    </appender>
+
+    <logger name="transactionLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TRANSACTION"/>
+    </logger> 
+
+
 </configuration>
