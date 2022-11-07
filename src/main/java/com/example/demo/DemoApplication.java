@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.fluentd.logger.FluentLogger;
+
 
 @RestController
 @SpringBootApplication
@@ -17,6 +21,7 @@ public class DemoApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
     private static final Logger transactionLogger = LoggerFactory.getLogger("transactionLogger");
+    private static FluentLogger LOCALLOG = FluentLogger.getLogger("fluentd.test");
         
     @RequestMapping("/")
     String home() {
@@ -45,6 +50,15 @@ public class DemoApplication {
         transactionLogger.warn("This will be printed on warn for " + name + " in the transaction.log");
         transactionLogger.error("This will be printed on error for " + name + " in the transaction.log");
         return "Hello " + name + "! Transaction Log files have been printed for you";
+    }
+    @RequestMapping(value = "/localhost/{name}")
+    String localHostName(@PathVariable String name) {
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("from", "userA");
+        data.put("to", name);
+        LOCALLOG.log("INFO", data);
+
+        return "Hello " + name + "! Logs sent straight for FluentD  have been printed for you";
     }
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
