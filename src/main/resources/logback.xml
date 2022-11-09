@@ -24,6 +24,7 @@
         <appender-ref ref="STDOUT" />
     </root>
 
+    <!-- 
     <appender name="TRANSACTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
        <file>${LOG_ROOT}/${TRANSACTRION_LOG_NAME}.log</file>
         <append>true</append>
@@ -32,19 +33,61 @@
 		</encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_ROOT}/${TRANSACTRION_LOG_NAME}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <!-- each archived file, size max 10MB -->
             <maxFileSize>10MB</maxFileSize>
-            <!-- total size of all archive files, if total size > 100MB, it will delete old archived file -->
             <totalSizeCap>100MB</totalSizeCap>
-            <!-- 10 days to keep -->
             <maxHistory>10</maxHistory>
         </rollingPolicy>
-    </appender>
+    </appender> 
+    
 
     <logger name="transactionLogger" additivity="false">
         <level value="TRACE"/>
         <appender-ref ref="TRANSACTION"/>
     </logger> 
+    -->
+     <!-- Fluency -->
+    <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
+        <!-- Fluentd connection -->
+        <remoteHost>localhost</remoteHost>
+        <port>24224</port>
+        <tag>transaction_log.ng.double.encoded</tag>
+        <!-- [Optional] Configurations to customize Fluency's behavior: https://github.com/komamitsu/fluency#usage  -->
+        <!--<ackResponseMode>true</ackResponseMode>-->
+        <!--<fileBackupDir>/tmp</fileBackupDir>-->
+        <!--<bufferChunkInitialSize>2097152</bufferChunkInitialSize>-->
+        <!--<bufferChunkRetentionSize>16777216</bufferChunkRetentionSize>-->
+        <!--<maxBufferSize>268435456</maxBufferSize>-->
+        <!--<connectionTimeoutMilli>5000</connectionTimeoutMilli>-->
+        <!--<readTimeoutMilli>5000</readTimeoutMilli>-->
+        <!--<waitUntilBufferFlushed>30</waitUntilBufferFlushed>-->
+        <!--<waitUntilFlusherTerminated>40</waitUntilFlusherTerminated>-->
+        <!--<flushIntervalMillis>200</flushIntervalMillis>-->
+        <!--<senderMaxRetryCount>12</senderMaxRetryCount>-->
+        <!-- [Optional] Enable/Disable use of EventTime to get sub second resolution of log event date-time -->
+        <useEventTime>false</useEventTime>
+        <sslEnabled>false</sslEnabled>
+        <!--  [Optional] If true, Map Marker is expanded instead of nesting in the marker name -->
+        <flattenMapMarker>false</flattenMapMarker>
+        <encoder>
+            <pattern>%level</pattern>
+        </encoder>>
+        <!--        <encoder>-->
+        <!--            <pattern><![CDATA[%date{HH:mm:ss.SSS} [%thread] %-5level %logger{15}#%line %msg]]></pattern>-->
+        <!--        </encoder>-->
+    </appender>
 
+    <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- Max queue size of logs which is waiting to be sent (When it reach to the max size, the log will be disappeared). -->
+        <queueSize>999</queueSize>
+        <!-- Never block when the queue becomes full. -->
+        <neverBlock>true</neverBlock>
+        <maxFlushTime>10000</maxFlushTime>
+        <appender-ref ref="FLUENCY_SYNC" />
+    </appender>
+    
+    <logger name="fluent_transaction_log" additivity="true">
+        <level value="DEBUG"/>
+        <appender-ref ref="FLUENCY"/>
+    </logger>
 
 </configuration>

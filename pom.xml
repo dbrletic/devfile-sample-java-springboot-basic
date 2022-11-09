@@ -43,20 +43,36 @@
     		<groupId>org.springframework.boot</groupId>
    			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-<!--		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.4.4</version>
-		</dependency>
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.4.4</version>
-		</dependency>-->
-		<dependency>
-    		<groupId>org.fluentd</groupId>
+    		<groupId>ch.qos.logback</groupId>
+    		<artifactId>logback-classic</artifactId>
+  		</dependency>
+
+  		<dependency>
+    		<groupId>com.sndyuk</groupId>
+    		<artifactId>logback-more-appenders</artifactId>
+    		<version>1.8.7</version>
+ 		</dependency>
+
+  <!-- [Optional] If you use The Fluentd appender, You need to add the dependency(fluent-logger). -->
+  		<dependency>
+  			<groupId>org.fluentd</groupId>
     		<artifactId>fluent-logger</artifactId>
     		<version>0.3.4</version>
+  		</dependency>
+
+  <!-- [Optional] If you use The Fluency appender, You need to add the dependency(fluency). -->
+  		<dependency>
+    		<groupId>org.komamitsu</groupId>
+    		<artifactId>fluency-core</artifactId>
+    		 <version>2.7.0</version>
+    		<optional>true</optional>
+  		</dependency>
+ 		<dependency>
+    		<groupId>org.komamitsu</groupId>
+    		<artifactId>fluency-fluentd</artifactId>
+    		 <version>2.7.0</version>
+    		<optional>true</optional>
   		</dependency>
 	</dependencies>
 	<build>
