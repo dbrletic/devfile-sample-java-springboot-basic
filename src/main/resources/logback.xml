@@ -2,16 +2,7 @@
 
 <configuration debug="true">
     <property name="LOG_ROOT" value="/opt/cms/logs" />
-	<property name="LOG_FILE_NAME" value="application" />
     <property name="TRANSACTRION_LOG_NAME" value="transaction" />
-
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${LOG_ROOT}/${LOG_FILE_NAME}.log</file>
-        <append>true</append>
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-		</encoder>
-	</appender>
 <!-- STDOUT console output   -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -23,32 +14,10 @@
 		<!-- <appender-ref ref="FILE" /> -->
         <appender-ref ref="STDOUT" />
     </root>
-
-    <!-- 
-    <appender name="TRANSACTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
-       <file>${LOG_ROOT}/${TRANSACTRION_LOG_NAME}.log</file>
-        <append>true</append>
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-		</encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_ROOT}/${TRANSACTRION_LOG_NAME}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <maxFileSize>10MB</maxFileSize>
-            <totalSizeCap>100MB</totalSizeCap>
-            <maxHistory>10</maxHistory>
-        </rollingPolicy>
-    </appender> 
-    
-
-    <logger name="transactionLogger" additivity="false">
-        <level value="TRACE"/>
-        <appender-ref ref="TRANSACTION"/>
-    </logger> 
-    -->
      <!-- Fluency -->
     <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
         <!-- Fluentd connection -->
-        <remoteHost>localhost</remoteHost>
+        <remoteHost>fluent-bit.fluentd-s3-poc.svc.cluster.local</remoteHost>
         <port>24224</port>
         <tag>transaction_log.ng.double.encoded</tag>
         <!-- [Optional] Configurations to customize Fluency's behavior: https://github.com/komamitsu/fluency#usage  -->
@@ -84,7 +53,7 @@
         <maxFlushTime>10000</maxFlushTime>
         <appender-ref ref="FLUENCY_SYNC" />
     </appender>
-    
+
     <logger name="fluent_transaction_log" additivity="true">
         <level value="DEBUG"/>
         <appender-ref ref="FLUENCY"/>
