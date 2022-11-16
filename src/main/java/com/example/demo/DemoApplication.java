@@ -21,7 +21,7 @@ public class DemoApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
    //
-    private static FluentLogger LOCALLOG = FluentLogger.getLogger("fluent_transaction_log");
+    private static FluentLogger LOCALLOG = FluentLogger.getLogger("FLUENCY_SYNC");
         
     @RequestMapping("/")
     String home() {
