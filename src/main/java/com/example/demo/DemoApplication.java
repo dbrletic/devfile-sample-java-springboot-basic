@@ -22,7 +22,9 @@ public class DemoApplication {
     private static final Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
    //
     private static FluentLogger LOCALLOG = FluentLogger.getLogger("FLUENCY_SYNC");
-        
+    
+    private static final Logger FLUENTLOG = LoggerFactory.getLogger("fluent_transaction_log");
+
     @RequestMapping("/")
     String home() {
 
@@ -58,9 +60,10 @@ public class DemoApplication {
         data.put("from", "userA");
         data.put("to", name);
 
-        LOG.info(LOCALLOG.toString());
+        LOG.info(FLUENTLOG.toString());
      
-        LOCALLOG.log("NAME INFO", data);
+        FLUENTLOG.info("NAME INFO", data);
+        //LOCALLOG.log("NAME INFO", data);
 
         return "Hello " + name + "! Logs sent straight for FluentD  have been printed for you";
     }
