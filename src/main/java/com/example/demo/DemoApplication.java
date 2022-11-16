@@ -57,11 +57,10 @@ public class DemoApplication {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("from", "userA");
         data.put("to", name);
-        if(LOCALLOG.isConnected())
-            LOG.info("Connected to remote service");
-        else
-            LOG.info("Not connect to remote service");       
-        LOCALLOG.log("INFO", data);
+
+        LOG.info(LOCALLOG.toString());
+     
+        LOCALLOG.log("NAME INFO", data);
 
         return "Hello " + name + "! Logs sent straight for FluentD  have been printed for you";
     }
