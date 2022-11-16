@@ -15,7 +15,7 @@
         <appender-ref ref="STDOUT" />
     </root>
      <!-- Fluency -->
-    <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
+    <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.DataFluentAppender">
         <!-- Fluentd connection -->
         <remoteHost>${FLUENT-REMOTE-HOST}</remoteHost>
         <port>24224</port>
