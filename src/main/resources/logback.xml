@@ -11,9 +11,10 @@
     </appender>
 
     <root level='${ROOT_LOG_LEVEL}'>
-		<appender-ref ref="FLUENCY"/>
+		<appender-ref ref="FLUENCY_SYNC"/>
         <appender-ref ref="STDOUT" />
     </root>
+
      <!-- Fluency -->
     <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.DataFluentAppender">
         <!-- Fluentd connection -->
