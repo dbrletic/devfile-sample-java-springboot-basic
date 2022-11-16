@@ -17,7 +17,7 @@
      <!-- Fluency -->
     <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
         <!-- Fluentd connection -->
-        <remoteHost>fluent-bit.fluentd-s3-poc.svc.cluster.local</remoteHost>
+        <remoteHost>${FLUENT-REMOTE-HOST}</remoteHost>
         <port>24224</port>
         <tag>transaction_log.ng.double.encoded</tag>
         <!-- [Optional] Configurations to customize Fluency's behavior: https://github.com/komamitsu/fluency#usage  -->
