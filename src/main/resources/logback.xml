@@ -10,7 +10,7 @@
         </encoder>
     </appender>
 
-    <root level="INFO">
+    <root level="TRACE">
 		<!-- <appender-ref ref="FILE" /> -->
         <appender-ref ref="STDOUT" />
     </root>
@@ -55,7 +55,7 @@
     </appender>
 
     <logger name="fluent_transaction_log" additivity="true">
-        <level value="trace"/>
+        <level value="TRACE"/>
         <appender-ref ref="FLUENCY"/>
     </logger>
 
