@@ -33,6 +33,7 @@
 
     <root level='${ROOT_LOG_LEVEL}'>
 	    <appender-ref ref="FLUENCY_SYNC"/>
+        <appender-ref ref="STDOUT" />
     </root>
 
 
