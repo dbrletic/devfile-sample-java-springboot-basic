@@ -20,11 +20,6 @@
         <!-- Fluentd connection -->
         <remoteHost>${FLUENT-REMOTE-HOST}</remoteHost>
         <port>24224</port>
-        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
-			<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
-			</jsonFormatter>
-			<timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
-		</layout>
     </appender>
 
     <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
