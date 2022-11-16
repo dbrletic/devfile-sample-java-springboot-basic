@@ -16,6 +16,7 @@
         <!-- Fluentd connection -->
         <remoteHost>${FLUENT-REMOTE-HOST}</remoteHost>
         <port>24224</port>
+        <tag>transaction-log</tag>
     </appender>
 
     <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
