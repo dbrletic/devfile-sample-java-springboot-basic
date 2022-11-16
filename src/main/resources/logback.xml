@@ -19,17 +19,17 @@
         <tag>transaction-log</tag>
     </appender>
 
-    <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
-        <!-- Max queue size of logs which is waiting to be sent (When it reach to the max size, the log will be disappeared). -->
+    <!-- <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
+         Max queue size of logs which is waiting to be sent (When it reach to the max size, the log will be disappeared). 
         <queueSize>999</queueSize>
-        <!-- Never block when the queue becomes full. -->
+         Never block when the queue becomes full.
         <neverBlock>true</neverBlock>
         <maxFlushTime>10000</maxFlushTime>
         <appender-ref ref="FLUENCY_SYNC" />
-    </appender>
+    </appender> -->
 
     <logger name="fluent_transaction_log" additivity="true">
-        <appender-ref ref="FLUENCY"/>
+        <appender-ref ref="FLUENCY_SYNC"/>
     </logger>
 
     <root level='${ROOT_LOG_LEVEL}'>
