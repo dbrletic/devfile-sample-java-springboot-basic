@@ -55,7 +55,7 @@
     </appender>
 
     <logger name="fluent_transaction_log" additivity="true">
-        <level value="DEBUG"/>
+        <level value="trace"/>
         <appender-ref ref="FLUENCY"/>
     </logger>
 
