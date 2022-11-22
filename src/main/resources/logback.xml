@@ -12,7 +12,7 @@
 
   
      <!-- Fluency -->
-    <appender name="fluent_transaction_log" class="ch.qos.logback.more.appenders.DataFluentAppender">
+    <appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.DataFluentAppender">
         <!-- Fluentd connection -->
         <remoteHost>${FLUENT-REMOTE-HOST}</remoteHost>
         <port>${FLUENT-REMOTE-PORT}</port>
@@ -28,9 +28,9 @@
         <appender-ref ref="FLUENCY_SYNC" />
     </appender> -->
 
-    <!-- <logger name="fluent_transaction_log" additivity="true">
+     <logger name="fluent_transaction_log" additivity="true">
         <appender-ref ref="FLUENCY_SYNC"/>
-    </logger> -->
+    </logger>
 
     <root level='${ROOT_LOG_LEVEL}'>
 	   <!-- <appender-ref ref="FLUENCY_SYNC"/> -->
