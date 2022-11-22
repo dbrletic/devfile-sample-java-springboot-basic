@@ -15,7 +15,7 @@
     <appender name="fluent_transaction_log" class="ch.qos.logback.more.appenders.DataFluentAppender">
         <!-- Fluentd connection -->
         <remoteHost>${FLUENT-REMOTE-HOST}</remoteHost>
-        <port>${FLUENT-REMOTE-PORT}</port>
+        <port>24222</port>
         <tag>transaction-log</tag>
     </appender>
 
