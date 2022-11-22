@@ -15,7 +15,7 @@
     <appender name="fluent_transaction_log" class="ch.qos.logback.more.appenders.DataFluentAppender">
         <!-- Fluentd connection -->
         <remoteHost>${FLUENT-REMOTE-HOST}</remoteHost>
-        <port>24224</port>
+        <port>${FLUENT-REMOTE-PORT}</port>
         <tag>transaction-log</tag>
     </appender>
 
@@ -28,7 +28,7 @@
         <appender-ref ref="FLUENCY_SYNC" />
     </appender> -->
 
-   <!--  <logger name="fluent_transaction_log" additivity="true">
+    <!-- <logger name="fluent_transaction_log" additivity="true">
         <appender-ref ref="FLUENCY_SYNC"/>
     </logger> -->
 
