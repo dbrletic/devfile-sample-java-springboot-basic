@@ -67,11 +67,11 @@ public class DemoApplication {
         LOG.info(FLUENTLOG.toString());
         
         for(int i=0;i<5;i++){
-            FLUENTLOG.trace("NAME INFO with data Round " + i + " from pod: " + podName, data);
-            FLUENTLOG.debug("NAME INFO with data Round " + i + " from pod: " + podName, data);
-            FLUENTLOG.info("NAME INFO with data Round " + i + " from pod: " + podName, data);
-            FLUENTLOG.warn("NAME INFO with data Round " + i + " from pod: " + podName, data);
-            FLUENTLOG.error("NAME INFO with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.trace(name + " TRACE  with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.debug(name + " DEBUG with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.info(name + " INFO with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.warn(name + " WARN with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.error(name + "ERROR with data Round " + i + " from pod: " + podName, data);
 
         }
         return "Hello " + name + "! Logs sent straight for FluentD  have been printed for you from pod "+ podName;
