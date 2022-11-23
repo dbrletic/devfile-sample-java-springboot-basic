@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
 import org.fluentd.logger.FluentLogger;
 
 
@@ -24,6 +26,8 @@ public class DemoApplication {
     private static FluentLogger LOCALLOG = FluentLogger.getLogger("FLUENCY_SYNC");
     
     private static final Logger FLUENTLOG = LoggerFactory.getLogger("fluent_transaction_log");
+
+    String podName = Optional.ofNullable(System.getenv("HOSTNAME")).toString();
 
     @RequestMapping("/")
     String home() {
@@ -61,11 +65,16 @@ public class DemoApplication {
         data.put("to", name);
 
         LOG.info(FLUENTLOG.toString());
-     
-        FLUENTLOG.info("NAME INFO", data);
-        //LOCALLOG.log("NAME INFO", data);
+        
+        for(int i=0;i<5;i++){
+            FLUENTLOG.trace("NAME INFO with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.debug("NAME INFO with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.info("NAME INFO with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.warn("NAME INFO with data Round " + i + " from pod: " + podName, data);
+            FLUENTLOG.error("NAME INFO with data Round " + i + " from pod: " + podName, data);
 
-        return "Hello " + name + "! Logs sent straight for FluentD  have been printed for you";
+        }
+        return "Hello " + name + "! Logs sent straight for FluentD  have been printed for you from pod "+ podName;
     }
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
