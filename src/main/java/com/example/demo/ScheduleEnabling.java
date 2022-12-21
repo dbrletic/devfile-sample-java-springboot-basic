@@ -19,9 +19,9 @@ import org.fluentd.logger.FluentLogger;
 public class ScheduleEnabling {
     
     String podName = System.getenv("HOSTNAME");
-    //private static final Logger FLUENTLOG = LoggerFactory.getLogger("fluent_transaction_log");
+    private static final Logger FLUENTLOG = LoggerFactory.getLogger("fluent_transaction_log");
 
-    private static FluentLogger LOG = FluentLogger.getLogger("fluent_transaction_log", "localhost", 24224);
+    //private static FluentLogger LOG = FluentLogger.getLogger("fluent_transaction_log", "localhost", 24224);
     @Scheduled(fixedRateString = "${sample.schedule.string}")
     public void scheduleTaskWithFixedRate() throws InterruptedException {
         sendLogsThroughLogger();
@@ -35,16 +35,16 @@ public class ScheduleEnabling {
         data.put("to", "userB");
        
         for(int i=0;i<5;i++){
-            LOG.log("Trace", data);
+            /*LOG.log("Trace", data);
             LOG.log("Debug", data);
             LOG.log("Info", data);
             LOG.log("Warn", data);
-            LOG.log("Error", data);
-            /*FLUENTLOG.trace("TRACE  with data Round " + i + " from pod: " + podName);
+            LOG.log("Error", data);*/
+            FLUENTLOG.trace("TRACE  with data Round " + i + " from pod: " + podName);
             FLUENTLOG.debug(" DEBUG with data Round " + i + " from pod: " + podName);
             FLUENTLOG.info(" INFO with data Round " + i + " from pod: " + podName);
             FLUENTLOG.warn( " WARN with data Round " + i + " from pod: " + podName);
-            FLUENTLOG.error("ERROR with data Round " + i + " from pod: " + podName); */
+            FLUENTLOG.error("ERROR with data Round " + i + " from pod: " + podName);
 
         }
 
